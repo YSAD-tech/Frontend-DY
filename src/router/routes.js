@@ -6,14 +6,14 @@ import Proveedores from '../views/Proveedores.vue'
 import Movimientos from '../views/Movimientos.vue'
 import Categorias from '../views/Categorias.vue'
 import Singup from '../views/Singup.vue'
-import App from '../App.vue'
+import MainLayout from '../layouts/MainLayout.vue'
 
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes =[
-    {path:"/", component:App, children:[
+    {path:"/", component: MainLayout, children:[
         {path:"/login", component:Login},
-        {path:"/singup", component:Singup}
+        {path:"", component:Singup}
     ]},
     {path:"/home", component:Home, children:[
         {path:"/articulos", component:Articulos},

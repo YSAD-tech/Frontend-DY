@@ -1,102 +1,84 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <!-- Header -->
-    <q-header elevated>
-      <q-toolbar>
-        <!-- Ícono del menú hamburguesa para abrir el drawer -->
-        <q-btn flat icon="menu" @click="toggleDrawer" aria-label="Abrir Menú" />
-        <q-toolbar-title>
-          Mi Aplicación
-        </q-toolbar-title>
-        <q-btn flat label="Login" @click="handleLogin" />
-        <q-btn flat label="Sign Up" @click="handleSignUp" />
-      </q-toolbar>
-    </q-header>
-
-    <!-- Sidebar (Menú lateral flotante) -->
-    <q-drawer v-model="drawer" show-if-above side="left" bordered :floating="true" :overlay="true">
-      <q-list>
-        <q-item-label header>
-          Menú
-        </q-item-label>
-        
-        <!-- Botones del menú lateral -->
-        <q-item clickable to="/" exact>
-          <q-item-section>
-            <q-btn label="Inicio" color="primary" />
-          </q-item-section>
-        </q-item>
-        
-        <q-item clickable to="/login">
-          <q-item-section>
-            <q-btn label="Acerca de" color="primary" />
-          </q-item-section>
-        </q-item>
-        
-        <q-item clickable to="/articulos">
-          <q-item-section>
-            <q-btn label="Contacto" color="primary" />
-          </q-item-section>
-        </q-item>
-        
-        <q-item clickable to="/clientes">
-          <q-item-section>
-            <q-btn label="Perfil" color="primary" />
-          </q-item-section>
-        </q-item>
-
-        <!-- Agregar 4 botones más -->
-        <q-item clickable to="/movimientos">
-          <q-item-section>
-            <q-btn label="Perfil" color="primary" />
-          </q-item-section>
-        </q-item>
-        <q-item clickable to="/proveedores">
-          <q-item-section>
-            <q-btn label="Perfil" color="primary" />
-          </q-item-section>
-        </q-item>
-        <q-item clickable to="/categorias">
-          <q-item-section>
-            <q-btn label="Perfil" color="primary" />
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-drawer>
-
-    <!-- Página principal -->
+  <q-layout>
     <q-page-container>
-      <q-page>
-        <router-view />
+      <q-page padding>
+        <h4 class="text-center  text-weight-bold">Inventario JPL</h4>
+        <hr>
+        <q-row class="q-col-gutter-md">
+          <q-col v-for="(route, index) in routes" :key="index" cols="12" sm="6" md="4" lg="3" class="q-pa-md">
+            <q-card @click="goToRoute(route.path)" class="my-card">
+              <q-card-section class="card-img">
+                <q-img :src="route.image" alt="Imagen" :ratio="1" class="my-card-img" />
+                <div class="text-h6 text-center q-mt-sm text-weight-bold">
+                  {{ route.name }}
+                </div>
+              </q-card-section>
+            </q-card>
+          </q-col>
+        </q-row>
       </q-page>
     </q-page-container>
   </q-layout>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      drawer: false, // El menú lateral inicialmente no se mostrará
-    }
-  },
-  methods: {
-    toggleDrawer() {
-      this.drawer = !this.drawer; // Al hacer clic en el botón, alterna la visibilidad del menú lateral
-    },
-    handleLogin() {
-      console.log('Iniciar sesión');
-    },
-    handleSignUp() {
-      console.log('Registrarse');
-    },
-    handleClick(buttonId) {
-      alert(`Has hecho clic en el botón ${buttonId}`);
-    }
-  }
+<script setup>
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const routes = [
+  { name: 'Usuarios', path: '/usuarios', image: 'https://cdn-icons-png.freepik.com/512/11468/11468063.png' },
+  { name: 'Clientes', path: '/terceros/clientes', image: 'https://cdn-icons-png.freepik.com/512/12155/12155222.png' },
+  { name: 'Salidas', path: '/salidas', image: 'https://cdn-icons-png.freepik.com/512/12155/12155241.png' },
+  { name: 'Entradas', path: '/entradas', image: 'https://cdn-icons-png.freepik.com/512/12154/12154947.png' },
+  { name: 'Artículos', path: '/articulos', image: 'https://cdn-icons-png.freepik.com/512/12154/12154988.png' },
+  { name: 'Categorías', path: '/categorias', image: 'https://cdn-icons-png.freepik.com/512/12154/12154936.png' },
+  { name: 'Proveedores', path: '/terceros/proveedores', image: 'https://cdn-icons-png.freepik.com/512/12155/12155100.png' },
+
+]
+
+const goToRoute = (path) => {
+  router.push(path)
 }
 </script>
 
 <style scoped>
-/* Estilos opcionales */
+.my-card {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.338);
+}
+
+.my-card:hover {
+  transform: translateY(-5px);
+}
+
+.card-img {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 260px;
+}
+
+.my-card-img {
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+  justify-content: center;
+}
+
+.my-card-img:hover {
+  transform: scale(1.05);
+}
+
+
+
+q-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
 </style>
