@@ -1,10 +1,17 @@
 <template>
   <q-layout>
+    <!-- Header con el botón de Sign Up -->
+    <q-header class="bg-primary text-white">
+      <div class="row justify-between items-center q-pa-md">
+        <div>INVENTARIO DY 📦</div>
+        <q-btn flat label="Sign Up" color="white" @click="goToSignUp" />
+      </div>
+    </q-header>
     <q-page-container>
       <q-page class="flex flex-center">
         <q-card class="my-card" bordered>
           <div class="header-login">
-            <p>LOG IN DY 📦</p>
+            <p>📦 LOG IN DY 📦</p>
           </div>
           <br />
           <h6>Iniciar Sesión</h6>
@@ -13,9 +20,9 @@
           <div class="login-form" :class="{ 'fade-in': showForm }">
             <q-card-section class="q-pa-none">
               <div class="q-gutter-md">
-                <q-input outlined v-model="email" label="Email" type="email" dense autofocus :rules="[
-                  val => val && val.length > 0 || 'El email es obligatorio',
-                  val => /.+@.+\..+/.test(val) || 'El email es inválido'
+                <q-input outlined v-model="email" label="Email" type="email" dense autofocus :rules="[ 
+                  val => val && val.length > 0 || 'El email es obligatorio', 
+                  val => /.+@.+\..+/.test(val) || 'El email es inválido' 
                 ]" />
                 <q-input v-model="password" :type="showPassword ? 'text' : 'password'" label="Contraseña" outlined dense
                   color="primary" class="q-mt-md bordered-input text-bold"
@@ -25,7 +32,6 @@
                       @click="togglePasswordVisibility" />
                   </template>
                 </q-input>
-
               </div>
             </q-card-section>
             <br /><br />
@@ -58,6 +64,11 @@ const authStore = useAuthStore();
 // Mostrar/ocultar contraseña
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
+};
+
+// Función para redirigir al registro
+const goToSignUp = () => {
+  router.push("/singup");
 };
 
 onMounted(() => {
@@ -117,7 +128,6 @@ const login = async () => {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   padding-bottom: 15px;
-
 }
 
 .header-login {
@@ -130,8 +140,6 @@ const login = async () => {
   color: white;
   border-radius: 12px 12px 0 0;
   font-weight: 500;
-
-
 }
 
 hr {
@@ -170,33 +178,33 @@ h6 {
 .q-input {
   border-radius: 8px;
   padding: 20px 40px 0px;
-
-
 }
 
 .q-btn {
   border-radius: 8px;
   display: flex;
-
-  margin: 20px 30px 5px;
-  background-color: rgb(0, 60, 100);
+  margin: 6px 30px 5px;
+  background-color: rgb(148, 148, 148);
   color: white;
   font-weight: 600;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-
-
-
+.q-header{
+  font-size: 30px;
+  height: 80px !important;
+  background-color: rgb(0, 60, 100) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
 }
 
 #buttom {
   display: flex;
   justify-content: center;
+  color: rgb(0, 60, 100) !important;
 }
 
 .q-card-actions {
   padding: 10px 0;
   margin: 40px;
-
 }
 </style>

@@ -1,15 +1,19 @@
 <template>
   <q-layout view="hHh lpR fFf">
+    <q-header class="bg-primary text-white">
+      <div class="row justify-between items-center q-pa-md">
+        <div>INVENTARIO DY 📦</div>
+        <q-btn flat label="Sign in" color="white" @click="goToLogIn" />
+      </div>
+    </q-header>
     <q-page-container>
-      <q-page class="text-white flex flex-center">
-        <q-card class="bordered-card">
-          <q-card-section>
+      <q-page class="flex flex-center">
+        <q-card class="my-card" bordered>
             <div class="header-login">
-              <p> 📦 SING UP DY 📦</p>
+              <p> 📦 SIGN UP DY 📦</p>
             </div>
-            <br />
             <h6>Crear Cuenta</h6>
-            <hr />
+            <hr/>
             <div class="login-form" :class="{ 'fade-in': showForm }">
               <q-form @submit.prevent="handleSubmit" ref="formRef">
                 <q-card-section>
@@ -18,7 +22,9 @@
                     :rules="[val => !!val || 'Ingrese su nombre de usuario']" />
                   <q-input v-model="form.email" label="Email" type="email" outlined dense color="primary"
                     class="q-mt-md bordered-input text-bold"
-                    :rules="[val => !!val || 'Ingrese un email valido', val => /.+@.+\..+/.test(val) || 'Email no válido']" />
+                    :rules="[
+                      val => !!val || 'Ingrese un email valido', 
+                      val => /.+@.+\..+/.test(val) || 'Email no válido']" />
                   <q-input v-model="form.password" :type="showPassword ? 'text' : 'password'" label="Contraseña"
                     outlined dense color="primary" class="q-mt-md bordered-input text-bold"
                     :rules="[val => !!val || 'Ingrese una contraseña']">
@@ -39,7 +45,6 @@
                 {{ error }}
               </q-card-section>
             </div>
-          </q-card-section>
         </q-card>
       </q-page>
     </q-page-container>
@@ -66,6 +71,10 @@ const $q = useQuasar();
 
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
+};
+
+const goToLogIn = () => {
+  router.push("/");
 };
 
 const handleSubmit = async () => {
@@ -122,8 +131,20 @@ const handleSubmit = async () => {
   color: white;
   border-radius: 12px 12px 0 0;
   font-weight: 500;
-  margin: -5% !important;
-  margin-top: -6.01% !important;
+  padding-top: 15px;
+}
+
+.my-card {
+  width: 400px;
+  border: 1px solid;
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding-bottom: 15px;
+}
+
+hr{
+  width: 70%;
 }
 
 h6 {
@@ -132,7 +153,13 @@ h6 {
   justify-content: center;
   align-items: center;
   margin: 15px;
+  padding-top: 2px;
   font-size: 30px;
+}
+
+.q-page {
+  min-height: 100vh;
+  background-color: #f5f5f5;
 }
 
 .text-white {
@@ -148,10 +175,38 @@ h6 {
   cursor: pointer;
 }
 
+.q-input {
+  border-radius: 8px;
+  padding: 20px 40px 0px;
+}
+
+.q-header{
+  font-size: 28.5px;
+  height: 80px !important;
+  background-color: rgb(0, 60, 100) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.q-btn {
+  border-radius: 8px;
+  display: flex;
+  margin: 6px 30px 5px;
+  background-color: rgb(148, 148, 148);
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 #buttom{
   display: flex;
   justify-content: center;
   align-items: center;
   color: rgb(0, 60, 100) !important;
 }
+
+.q-card-actions {
+  padding: 10px 0;
+  margin: 40px;
+}
+
 </style>

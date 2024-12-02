@@ -10,20 +10,11 @@ import MainLayout from '../layouts/MainLayout.vue'
 
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-const routes =[
-    {path:"/", component: MainLayout, children:[
-        {path:"/login", component:Login},
-        {path:"", component:Singup}
-    ]},
-    {path:"/home", component:Home, children:[
-        {path:"/articulos", component:Articulos},
-        {path:"/clientes", component:Clientes},
-        {path:"/proveedores", component:Proveedores},
-        {path:"/movimientos", component:Movimientos},
-        {path:"/categorias", component:Categorias},
-        
-    ]}
-]
+const routes = [
+    { path: "/", component: Login },
+    { path: "/singup", component: Singup },
+  ];
+  
 
 export const router = createRouter({
     history:createWebHashHistory(),
