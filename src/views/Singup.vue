@@ -22,9 +22,8 @@
                     :rules="[val => !!val || 'Ingrese su nombre de usuario']" />
                   <q-input v-model="form.email" label="Email" type="email" outlined dense color="primary"
                     class="q-mt-md bordered-input text-bold"
-                    :rules="[
-                      val => !!val || 'Ingrese un email valido', 
-                      val => /.+@.+\..+/.test(val) || 'Email no válido']" />
+                    :rules="[val => !!val || 'Ingrese un email valido', 
+                             val => /.+@.+\..+/.test(val) || 'Email no válido']" />
                   <q-input v-model="form.password" :type="showPassword ? 'text' : 'password'" label="Contraseña"
                     outlined dense color="primary" class="q-mt-md bordered-input text-bold"
                     :rules="[val => !!val || 'Ingrese una contraseña']">
@@ -66,6 +65,7 @@ const error = ref("");
 const loading = ref(false);
 const formRef = ref(null);
 const showPassword = ref(false); // Estado para mostrar/ocultar contraseña
+const showForm = ref(true); // Agregamos showForm para controlar la visibilidad del formulario
 const router = useRouter();
 const $q = useQuasar();
 
@@ -106,7 +106,7 @@ const handleSubmit = async () => {
     loading.value = false;
 
     // Redirige a Home después del registro
-    router.push("/home");
+    router.replace("/home");
   } catch (err) {
     console.error("Error al registrar el usuario:", err);
     error.value =
@@ -209,4 +209,17 @@ h6 {
   margin: 40px;
 }
 
+/* Clase para la animación fade-in */
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 </style>

@@ -93,7 +93,7 @@ const login = async () => {
       console.log("Token guardado:", authStore.token);
 
       // Redirige a la página principal después del inicio de sesión
-      router.push("/home");
+      router.replace("/home");
     } else {
       console.log("Respuesta sin token:", response);
     }

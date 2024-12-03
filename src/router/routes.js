@@ -1,4 +1,4 @@
-import Login from '../views/Login.vue'
+import Login from '../views/login.vue'
 import Home from '../views/Home.vue'
 import Articulos from '../views/Articulos.vue'
 import Clientes from '../views/Clientes.vue'
@@ -13,6 +13,7 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
     { path: "/", component: Login },
     { path: "/singup", component: Singup },
+    { path: "/home", component: Home}
   ];
   
 
